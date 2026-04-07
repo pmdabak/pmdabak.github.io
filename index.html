@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Priya M. Dabak — Applied Linguistics & Bilingual Education</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+    --accent-mid: #378ADD;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --text-light: #888;
+    --border: #e2e0d8;
+    --bg: #ffffff;
+    --bg-surface: #f8f7f4;
+    --radius: 10px;
+    --max: 860px;
+  }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 2rem;
+  }
+  nav ul {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    height: 52px;
+    align-items: center;
+  }
+  nav a {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* LAYOUT */
+  .page { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+
+  section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  /* HERO */
+  #about {
+    padding-top: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 3rem;
+    align-items: start;
+  }
+  .hero-name {
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .hero-bio {
+    font-size: 16px;
+    color: var(--text);
+    max-width: 560px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero-links a {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 5px 14px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .hero-links a:hover {
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+  }
+  .avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--accent);
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  /* RESEARCH PROJECTS */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    background: var(--bg);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .project-card:hover {
+    border-color: var(--accent-mid);
+    box-shadow: 0 2px 12px rgba(24,95,165,0.08);
+  }
+  .project-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 3px 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+  .project-title {
+    font-size: 17px;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+  .project-visual {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .project-visual img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .project-visual .placeholder {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    padding: 1rem;
+  }
+  .project-link {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  /* PUBLICATIONS */
+  .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .pub-item {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.15s;
+  }
+  .pub-item:hover { border-left-color: var(--accent); }
+  .pub-title {
+    font-size: 16px;
+    margin-bottom: 0.25rem;
+  }
+  .pub-meta {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+  .pub-year {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  /* CV */
+  .cv-block { margin-bottom: 2.5rem; }
+  .cv-block h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cv-entry {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .cv-year {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--text-light);
+    padding-top: 2px;
+  }
+  .cv-role { font-size: 16px; margin-bottom: 0.2rem; }
+  .cv-org {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 6px 16px;
+    margin-top: 1rem;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+  }
+  .cv-download:hover { background: var(--accent); color: white; text-decoration: none; }
+
+  /* WORK EXPERIENCE */
+  .work-list { display: flex; flex-direction: column; gap: 1.75rem; }
+  .work-item {}
+  .work-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem; }
+  .work-role { font-size: 17px; }
+  .work-dates {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .work-org {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .work-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .contact-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+  .contact-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.35rem;
+  }
+  .contact-value {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    #about { grid-template-columns: 1fr; }
+    .avatar { width: 100px; height: 100px; font-size: 32px; }
+    .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
+    nav ul { gap: 1rem; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div>
+      <h1 class="hero-name">Priya M. Dabak</h1>
+      <p class="hero-title">Applied Linguistics &amp; Bilingual Education</p>
+      <p class="hero-bio">
+        I study how multilingual learners acquire language and how bilingual education programs can be designed to better support them. My work draws on corpus linguistics, classroom discourse analysis, and sociolinguistic theory.
+      </p>
+      <div class="hero-links">
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="your-cv.pdf">Download CV</a>
+        <a href="mailto:your@email.edu">Email</a>
+      </div>
+    </div>
+    <div class="avatar">PD</div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <h2>Research Projects</h2>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <span class="project-tag">Ongoing</span>
+        <h3 class="project-title">Code-switching in Dual-Language Classrooms</h3>
+        <p class="project-desc">Examining how teachers and students use translanguaging as a pedagogical resource in K–8 dual-language programs.</p>
+        <div class="project-visual">
+          <!-- Replace src with your image file, e.g. src="chart1.png" -->
+          <div class="placeholder">Add your visualization here<br><small>Replace with: &lt;img src="your-image.png"&gt;</small></div>
+        </div>
+        <a class="project-link" href="#">Read more →</a>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">Completed</span>
+        <h3 class="project-title">Heritage Language Maintenance Among Second-Generation Immigrants</h3>
+        <p class="project-desc">A longitudinal study of heritage language attrition and maintenance strategies across three immigrant communities.</p>
+        <div class="project-visual">
+          <div class="placeholder">Add your visualization here<br><small>Replace with: &lt;img src="your-image.png"&gt;</small></div>
+        </div>
+        <a class="project-link" href="#">Read more →</a>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">In progress</span>
+        <h3 class="project-title">Academic Language Development in STEM Contexts</h3>
+        <p class="project-desc">Investigating how English learners develop discipline-specific academic language in secondary science classrooms.</p>
+        <div class="project-visual">
+          <div class="placeholder">Add your visualization here<br><small>Replace with: &lt;img src="your-image.png"&gt;</small></div>
+        </div>
+        <a class="project-link" href="#">Read more →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <p class="pub-title">Translanguaging as pedagogy: Evidence from dual-language kindergarten classrooms</p>
+        <p class="pub-meta">Dabak, P. M. &amp; Co-author, A. — <em>Journal of Applied Linguistics</em></p>
+        <p class="pub-year">2024</p>
+      </div>
+
+      <div class="pub-item">
+        <p class="pub-title">Heritage language attrition and the role of family language policy</p>
+        <p class="pub-meta">Dabak, P. M. — <em>Bilingual Research Journal</em></p>
+        <p class="pub-year">2023</p>
+      </div>
+
+      <div class="pub-item">
+        <p class="pub-title">Academic vocabulary growth in English learners: A corpus-based analysis</p>
+        <p class="pub-meta">Dabak, P. M., Co-author, B., &amp; Co-author, C. — <em>Language Learning</em></p>
+        <p class="pub-year">2022</p>
+      </div>
+
+      <div class="pub-item">
+        <p class="pub-title">Teacher language ideologies in bilingual education programs</p>
+        <p class="pub-meta">Dabak, P. M. — <em>International Journal of Bilingual Education and Bilingualism</em></p>
+        <p class="pub-year">2021</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+    <h2>CV</h2>
+
+    <div class="cv-block">
+      <h3>Education</h3>
+      <div class="cv-entry">
+        <span class="cv-year">2020</span>
+        <div>
+          <p class="cv-role">Ph.D. in Applied Linguistics</p>
+          <p class="cv-org">Your University Name</p>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <span class="cv-year">2015</span>
+        <div>
+          <p class="cv-role">M.A. in TESOL</p>
+          <p class="cv-org">Your University Name</p>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <span class="cv-year">2012</span>
+        <div>
+          <p class="cv-role">B.A. in Linguistics</p>
+          <p class="cv-org">Your University Name</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h3>Academic Positions</h3>
+      <div class="cv-entry">
+        <span class="cv-year">2021–present</span>
+        <div>
+          <p class="cv-role">Assistant Professor</p>
+          <p class="cv-org">Department of Applied Linguistics, Your University</p>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <span class="cv-year">2020–2021</span>
+        <div>
+          <p class="cv-role">Postdoctoral Research Fellow</p>
+          <p class="cv-org">Your Institution</p>
+        </div>
+      </div>
+    </div>
+
+    <a class="cv-download" href="your-cv.pdf">↓ Download full CV (PDF)</a>
+  </section>
+
+  <!-- WORK EXPERIENCE -->
+  <section id="experience">
+    <h2>Work Experience</h2>
+    <div class="work-list">
+
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-role">Curriculum Consultant</span>
+          <span class="work-dates">2019–2020</span>
+        </div>
+        <p class="work-org">Organization / School District Name</p>
+        <p class="work-desc">Developed bilingual curriculum materials for K–5 classrooms and provided professional development for teachers on language-responsive instruction.</p>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-role">ESL Program Coordinator</span>
+          <span class="work-dates">2016–2019</span>
+        </div>
+        <p class="work-org">Organization Name</p>
+        <p class="work-desc">Coordinated English language instruction programs for adult learners, managed a team of instructors, and oversaw assessment and placement.</p>
+      </div>
+
+      <div class="work-item">
+        <div class="work-header">
+          <span class="work-role">Language Instructor</span>
+          <span class="work-dates">2013–2016</span>
+        </div>
+        <p class="work-org">Organization Name</p>
+        <p class="work-desc">Taught English and academic writing to multilingual undergraduate students.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <p class="contact-label">Email</p>
+        <p class="contact-value"><a href="mailto:your@email.edu">your@email.edu</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">Office</p>
+        <p class="contact-value">Building Name, Room 000</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">Department</p>
+        <p class="contact-value">Applied Linguistics &amp; Bilingual Education</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">University</p>
+        <p class="contact-value">Your University Name</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 Priya M. Dabak
+</footer>
+
+</body>
+</html>
