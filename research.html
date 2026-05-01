@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Research — Priya M. Dabak</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+    --accent-mid: #378ADD;
+    --accent-soft: #F4F8FC;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --text-light: #888;
+    --border: #e2e0d8;
+    --bg: #ffffff;
+    --bg-surface: #f8f7f4;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --max: 980px;
+  }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV (matches index.html) */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 2rem;
+  }
+  nav ul {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    height: 52px;
+    align-items: center;
+  }
+  nav a {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  nav a:hover { color: var(--accent); }
+  nav a.active { color: var(--accent); }
+
+  /* PAGE */
+  .page { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 3rem 0 2rem;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+  }
+  .page-header p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding: 1.5rem 0 4rem;
+  }
+  /* The center spine */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-light) 0%, var(--accent-mid) 12%, var(--accent-mid) 88%, var(--accent-light) 100%);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .entry {
+    position: relative;
+    width: 50%;
+    padding: 1rem 3rem 1rem 0;
+    margin-bottom: 1.5rem;
+  }
+  .entry.right {
+    margin-left: 50%;
+    padding: 1rem 0 1rem 3rem;
+  }
+
+  /* SVG ICON ON SPINE */
+  .entry .marker {
+    position: absolute;
+    top: 1.75rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    box-shadow: 0 2px 6px rgba(24, 95, 165, 0.12);
+    z-index: 2;
+  }
+  .entry.left .marker { right: -19px; }
+  .entry.right .marker { left: -19px; }
+  .entry .marker svg { width: 18px; height: 18px; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.5rem 1.4rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: 0 6px 20px rgba(24, 95, 165, 0.08);
+    border-color: var(--accent-mid);
+  }
+
+  /* Soft pointer connecting card to spine */
+  .entry.left .card::after,
+  .entry.right .card::after {
+    content: '';
+    position: absolute;
+    top: 1.95rem;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .entry.left .card::after {
+    right: -8px;
+    transform: rotate(45deg);
+  }
+  .entry.right .card::after {
+    left: -8px;
+    transform: rotate(-135deg);
+  }
+
+  /* CARD CONTENT */
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .card-meta .dot {
+    width: 4px; height: 4px;
+    background: var(--text-light);
+    border-radius: 50%;
+  }
+  .card-meta .date-label { color: var(--text-light); font-weight: 500; }
+
+  .card-title {
+    font-size: 17px;
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  .card-title a { color: var(--text); }
+  .card-title a:hover { color: var(--accent); }
+
+  .card-collab {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .card-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* MOMENT-specific */
+  .card.moment {
+    background: var(--accent-soft);
+    border-color: var(--accent-light);
+  }
+  .card.moment::after {
+    background: var(--accent-soft);
+    border-top-color: var(--accent-light);
+    border-right-color: var(--accent-light);
+  }
+  .card.moment .card-body {
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .card-image {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 1rem;
+    display: block;
+    border: 1px solid var(--border);
+  }
+
+  /* PROJECT-specific accent */
+  .card.project {
+    border-left: 3px solid var(--accent);
+  }
+
+  /* RESPONSIVE: stack to single-column timeline on mobile */
+  @media (max-width: 760px) {
+    .timeline::before {
+      left: 22px;
+      transform: none;
+    }
+    .entry, .entry.right {
+      width: 100%;
+      margin-left: 0;
+      padding: 0.75rem 0 0.75rem 3.5rem;
+    }
+    .entry.left .marker,
+    .entry.right .marker {
+      left: 4px;
+      right: auto;
+    }
+    .entry.left .card::after,
+    .entry.right .card::after {
+      left: -8px;
+      right: auto;
+      transform: rotate(-135deg);
+    }
+    .entry.left .card.moment::after,
+    .entry.right .card.moment::after {
+      background: var(--accent-soft);
+    }
+    nav ul { gap: 1rem; overflow-x: auto; }
+  }
+
+  /* FOOTER (matches index.html) */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="index.html">About</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <header class="page-header">
+    <h1>Research</h1>
+    <p>Projects, fieldwork, and notes from along the way.</p>
+  </header>
+
+  <!--
+    TIMELINE — entries are ordered most recent first.
+    To add a new entry, copy one of the blocks below and swap in the content.
+
+    Each entry needs:
+      <article class="entry left">    OR    <article class="entry right">
+    Alternating left/right is what creates the zig-zag layout on desktop.
+
+    Two card types:
+      <div class="card project">  — for past/current projects
+      <div class="card moment">   — for fieldwork notes, ideas, snapshots
+
+    Moments can include an optional image:
+      <img class="card-image" src="filename.jpg" alt="description">
+  -->
+
+  <div class="timeline">
+
+    <!-- PROJECT — Sept 2024–present -->
+    <article class="entry left">
+      <div class="marker" aria-hidden="true">
+        <!-- folder icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+        </svg>
+      </div>
+      <div class="card project">
+        <div class="card-meta">
+          <span>Project</span>
+          <span class="dot"></span>
+          <span class="date-label">Sept 2024 – present</span>
+        </div>
+        <h3 class="card-title">Language Allocation in Practice in Dual Language Classrooms</h3>
+        <span class="card-collab">with Dr. Jennifer Renn</span>
+        <p class="card-body">
+          A case study examining bilingual teachers' micro-interactions and language choices in a Spanish–English dual language program, asking how they articulate and enact language allocation policy in the classroom. Data include classroom observation videos from a larger federally-funded project and stimulated recall interviews where teachers reflect on their language decisions.
+        </p>
+      </div>
+    </article>
+
+    <!-- PROJECT — Jan 2024 -->
+    <article class="entry right">
+      <div class="marker" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+        </svg>
+      </div>
+      <div class="card project">
+        <div class="card-meta">
+          <span>Project</span>
+          <span class="dot"></span>
+          <span class="date-label">Jan 2024</span>
+        </div>
+        <h3 class="card-title">Conceptual Metaphors of Multilingualism in Marathi</h3>
+        <span class="card-collab">with Dr. Jessica Chandras</span>
+        <p class="card-body">
+          An independent research project exploring how urban speakers from Maharashtra expressed their language ideologies around Marathi Language Day. Using conceptual metaphor as a lens, we examined how language ideologies are embedded in representations of language, multilingualism, and education.
+        </p>
+      </div>
+    </article>
+
+    <!-- MOMENT — Aug 2023 -->
+    <article class="entry left">
+      <div class="marker" aria-hidden="true">
+        <!-- camera icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+      </div>
+      <div class="card moment">
+        <div class="card-meta">
+          <span>Moment</span>
+          <span class="dot"></span>
+          <span class="date-label">August 2023</span>
+        </div>
+        <h3 class="card-title">First fieldwork experience</h3>
+        <p class="card-body">
+          My first time involved revisiting the school wearing a different identity. Sat in the staffroom of a school where I was not the teacher and reckoned with the new identity and power shift.
+        </p>
+        <img class="card-image" src="haraliaugust23.jpg" alt="Fieldwork — Harali, August 2023">
+      </div>
+    </article>
+
+    <!-- MOMENT — May 2023 -->
+    <article class="entry right">
+      <div class="marker" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+      </div>
+      <div class="card moment">
+        <div class="card-meta">
+          <span>Moment</span>
+          <span class="dot"></span>
+          <span class="date-label">May 2023</span>
+        </div>
+        <h3 class="card-title">Translinguistic Institute at Penn State</h3>
+        <p class="card-body">
+          A rare weeklong opportunity to slow down and discuss definitions, methods, and ways to "re-vision" your work — to go back to the drawing board and reconceptualize. Grateful for the community, generosity, and intellectual risk-taking made possible in this space.
+        </p>
+        <img class="card-image" src="pennstate.jpg" alt="Translinguistic Institute at Penn State, May 2023">
+      </div>
+    </article>
+
+    <!--
+      TO ADD A NEW ENTRY:
+      1. Decide if it's a "project" or "moment".
+      2. Copy one of the <article class="entry ..."> blocks above.
+      3. Alternate between class="entry left" and class="entry right" so the zig-zag continues.
+      4. Update the date, title, body. For moments with photos, swap the image filename and alt text.
+      5. Place it in chronological position (most recent at top).
+    -->
+
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Priya M. Dabak · Purdue University
+</footer>
+
+</body>
+</html>
