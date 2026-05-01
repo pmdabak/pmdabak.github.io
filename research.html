@@ -293,47 +293,13 @@
     height: 200px;
     object-fit: cover;
   }
-  /* Opposing tilts: left-side parent has right-tilted polaroid, vice versa */
   .entry.left .side-polaroid { transform: rotate(3deg); }
   .entry.right .side-polaroid { transform: rotate(-3deg); }
   .side-polaroid:hover { transform: rotate(0) scale(1.04); }
 
-  /* SIDE POLAROID CLUSTER */
-  .side-cluster {
-    position: absolute;
-    top: 1rem;
-    width: 480px;
-    z-index: 1;
-  }
-  .entry.left .side-cluster { left: calc(100% + 3rem); }
-  .entry.right .side-cluster { right: calc(100% + 3rem); }
-
-  .side-cluster .cluster-polaroid {
-    background: white;
-    padding: 10px 10px 28px;
-    box-shadow: 3px 5px 14px rgba(0,0,0,0.18);
-    border: 1px solid #eee;
-    width: 220px;
-    position: absolute;
-    transition: transform 0.25s;
-  }
-  .side-cluster .cluster-polaroid img {
-    display: block;
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-  }
-  .side-cluster .cluster-polaroid:hover {
-    transform: rotate(0) scale(1.06) !important;
-    z-index: 6;
-  }
-
-  .side-cluster .p1 { top: 0;    left: 0;     transform: rotate(-4deg); }
-  .side-cluster .p2 { top: 30px; left: 240px; transform: rotate(3deg); }
-
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .side-stack, .side-cluster { display: none; }
+    .side-stack { display: none; }
   }
   @media (max-width: 760px) {
     .timeline::before { left: 22px; transform: none; }
@@ -356,7 +322,7 @@
     }
     .card.moment, .entry.right .card.moment { transform: rotate(-1.5deg); }
 
-    .side-stack, .side-cluster {
+    .side-stack {
       display: block;
       position: static;
       width: 100%;
@@ -369,16 +335,6 @@
       transform: rotate(-2deg);
     }
     .entry.right .side-polaroid { transform: rotate(2deg); }
-
-    .side-cluster .cluster-polaroid {
-      position: static;
-      transform: none !important;
-      width: 47%;
-      display: inline-block;
-      vertical-align: top;
-      margin: 0.4rem 0.4rem 0.4rem 0;
-    }
-    .side-cluster .cluster-polaroid img { height: 130px; }
 
     nav ul { gap: 1rem; overflow-x: auto; }
   }
@@ -476,10 +432,6 @@
           Three cities, six presentations, lots of coffee.
         </p>
       </div>
-      <div class="side-cluster">
-        <div class="cluster-polaroid p1"><img src="aaal.jpg" alt="AAAL presentation"></div>
-        <div class="cluster-polaroid p2"><img src="aera.jpg" alt="AERA presentation"></div>
-      </div>
     </article>
 
     <!-- MOMENT: Penn State (May 2025) -->
@@ -498,7 +450,7 @@
         </div>
         <h3 class="card-title">Translinguistic Institute at Penn State</h3>
         <p class="card-body">
-          My autoethnography of intercultural communication as a domestic tourist in Hampi, India, was accepted into this weeklong institute, where I was mentored by Dr. Suresh Canagarajah. It was like an academic writer's retreat, a chance to engage in debate and discussion with scholars from around the world and a rare opportunity to slow down and critically re-vision your work.
+          I was accepted into this brilliant weeklong writing institute, mentored by Dr. Suresh Canagarajah — a rare opportunity to slow down and learn how to critically re-vision your work.
         </p>
       </div>
       <div class="side-stack">
@@ -550,7 +502,8 @@
         </div>
         <h3 class="card-title">First time in a US classroom</h3>
         <p class="card-body">
-          Volunteering on my advisor's project gave me an early opportunity to visit elementary classrooms in the US for data collection, and the culture shock was… shocking.
+          Volunteering on my advisor's project gave me an early opportunity to visit elementary classrooms in the US, and the culture shock was… shocking. It was fun to be inside a school again. My perceptions of access, achievement, behavior, classroom environment that I had carried over from my context were both challenged and confirmed.
+        </p>
       </div>
     </article>
 
@@ -570,7 +523,7 @@
         </div>
         <h3 class="card-title">First Fieldwork Experience</h3>
         <p class="card-body">
-          This opportunity to assist on an ethnographic project on language socialization in rural Maharashtra completely altered my professional and intellectual trajectory.
+          I had the opportunity to assist on this ethnographic project in rural Maharashtra with one of my favorite researchers. After working as a teacher for seven years, I wanted to see if I was cut out for research. This experience completely changed my professional and intellectual trajectory.
         </p>
       </div>
       <div class="side-stack">
