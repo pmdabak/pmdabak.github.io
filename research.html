@@ -15,9 +15,6 @@
     --accent-light: #E6F1FB;
     --accent-mid: #378ADD;
     --accent-soft: #F4F8FC;
-    --sticky: #FFF1A8;
-    --sticky-border: #F2DC7E;
-    --sticky-shadow: rgba(180, 150, 0, 0.18);
     --text: #1a1a1a;
     --text-muted: #5a5a5a;
     --text-light: #888;
@@ -137,8 +134,7 @@
   }
 
   /* MARKER */
-  .entry .marker,
-  .scatter-entry .marker {
+  .entry .marker {
     position: absolute;
     top: 1.75rem;
     width: 38px;
@@ -155,8 +151,7 @@
   }
   .entry.left .marker { right: -19px; }
   .entry.right .marker { left: -19px; }
-  .entry .marker svg,
-  .scatter-entry .marker svg { width: 18px; height: 18px; }
+  .entry .marker svg { width: 18px; height: 18px; }
 
   /* CARDS */
   .card {
@@ -235,7 +230,7 @@
 
   .card.project { border-left: 3px solid var(--accent); }
 
-  /* SIDE POLAROID (next to a moment card) */
+  /* SIDE POLAROID (single, hangs across the spine) */
   .side-stack {
     position: absolute;
     top: 1.5rem;
@@ -261,87 +256,47 @@
     object-fit: cover;
   }
   .side-polaroid:hover { transform: rotate(0) scale(1.04); }
-
   .entry.right .side-polaroid { transform: rotate(3deg); }
 
-  /* SCATTER ENTRY (Conference Season) */
-  .scatter-entry {
-    position: relative;
-    width: 100%;
-    margin: 0 0 2rem;
-    min-height: 520px;
-  }
-  .scatter-entry .marker {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50%;
-    margin-top: -19px;
-  }
-  .scatter-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    width: 280px;
-    margin: 230px auto 0;
-    position: relative;
-    z-index: 3;
-    text-align: center;
-  }
-  .scatter-card .card-meta { justify-content: center; margin-bottom: 0.4rem; }
-  .scatter-card .card-title { font-size: 16px; margin-bottom: 0; }
-
-  .polaroid {
+  /* SIDE POLAROID CLUSTER (multiple polaroids stacked across the spine) */
+  .side-cluster {
     position: absolute;
+    top: 1rem;
+    width: 320px;
+    z-index: 1;
+  }
+  .entry.left .side-cluster { left: calc(100% + 3rem); }
+  .entry.right .side-cluster { right: calc(100% + 3rem); }
+
+  .side-cluster .cluster-polaroid {
     background: white;
     padding: 10px 10px 28px;
     box-shadow: 3px 5px 14px rgba(0,0,0,0.18);
     border: 1px solid #eee;
-    z-index: 2;
+    width: 220px;
+    position: absolute;
     transition: transform 0.25s;
   }
-  .polaroid img {
+  .side-cluster .cluster-polaroid img {
     display: block;
     width: 100%;
-    height: 200px;
+    height: 170px;
     object-fit: cover;
   }
-  .polaroid:hover {
-    transform: rotate(0deg) scale(1.06) !important;
+  .side-cluster .cluster-polaroid:hover {
+    transform: rotate(0) scale(1.06) !important;
     z-index: 6;
   }
 
-  .polaroid.r1 { top: 0;     left: 56%;  width: 240px; transform: rotate(4deg); }
-  .polaroid.r2 { top: 130px; left: 76%;  width: 220px; transform: rotate(-3deg); }
-  .polaroid.r3 { top: 290px; left: 58%;  width: 240px; transform: rotate(2.5deg); }
-
-  .polaroid.l1 { top: 30px;  right: 60%; width: 240px; transform: rotate(-4deg); }
-
-  .scatter-sticky {
-    position: absolute;
-    top: 280px;
-    right: 60%;
-    width: 220px;
-    background: var(--sticky);
-    border: 1px solid var(--sticky-border);
-    border-radius: 4px;
-    padding: 0.85rem 1rem;
-    font-family: 'Caveat', cursive;
-    font-size: 17px;
-    line-height: 1.35;
-    color: #4a3f0a;
-    box-shadow: 2px 4px 10px var(--sticky-shadow);
-    transform: rotate(2deg);
-    z-index: 2;
-    transition: transform 0.2s;
-  }
-  .scatter-sticky:hover { transform: rotate(0) scale(1.04); }
+  /* Cluster positions: 4 polaroids around a small area */
+  .side-cluster .p1 { top: 0;    left: 10px;  transform: rotate(-4deg); }
+  .side-cluster .p2 { top: 30px; left: 100px; transform: rotate(3deg); }
+  .side-cluster .p3 { top: 220px; left: 0;    transform: rotate(2deg); }
+  .side-cluster .p4 { top: 250px; left: 100px; transform: rotate(-3deg); }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .side-stack { display: none; }
+    .side-stack, .side-cluster { display: none; }
   }
   @media (max-width: 760px) {
     .timeline::before { left: 22px; transform: none; }
@@ -363,8 +318,8 @@
       background: var(--accent-soft);
     }
 
-    /* Side polaroid renders inline below its parent on mobile */
-    .side-stack {
+    /* Side polaroid + cluster render below their parent on mobile */
+    .side-stack, .side-cluster {
       display: block;
       position: static;
       width: 100%;
@@ -378,30 +333,15 @@
     }
     .entry.right .side-polaroid { transform: rotate(2deg); }
 
-    /* Scatter entry collapses gracefully */
-    .scatter-entry {
-      min-height: auto;
-      padding: 0 0 0 3.5rem;
-    }
-    .scatter-entry .marker { left: 4px; transform: none; top: 1rem; margin-top: 0; }
-    .scatter-card {
-      width: 100%;
-      margin: 0 0 1rem;
-      text-align: left;
-    }
-    .scatter-card .card-meta { justify-content: flex-start; }
-    .polaroid, .scatter-sticky {
+    .side-cluster .cluster-polaroid {
       position: static;
+      transform: none !important;
+      width: 47%;
       display: inline-block;
       vertical-align: top;
-      width: 46%;
-      margin: 0.5rem 0.4rem 0.5rem 0;
+      margin: 0.4rem 0.4rem 0.4rem 0;
     }
-    .polaroid.r1, .polaroid.r2, .polaroid.r3, .polaroid.l1 {
-      transform: rotate(-2deg);
-    }
-    .polaroid img { height: 160px; }
-    .scatter-sticky { width: 92%; }
+    .side-cluster .cluster-polaroid img { height: 130px; }
 
     nav ul { gap: 1rem; overflow-x: auto; }
   }
@@ -480,35 +420,34 @@
 
     </div>
 
-    <!-- SCATTER: Conference Season (Mar–Apr 2026) -->
-    <article class="scatter-entry">
+    <!-- MOMENT: Conference Season (Mar–Apr 2026) — text card on right, 4 polaroids on left -->
+    <article class="entry right">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
           <circle cx="12" cy="13" r="4"/>
         </svg>
       </div>
-
-      <div class="scatter-card">
+      <div class="card moment">
         <div class="card-meta">
           <span>Moment</span>
           <span class="dot"></span>
           <span class="date-label">Mar – Apr 2026</span>
         </div>
         <h3 class="card-title">Conference Season</h3>
+        <p class="card-body">
+          Three cities, six presentations, lots of coffee.
+        </p>
       </div>
-
-      <div class="polaroid r1"><img src="aaal.jpg" alt="AAAL presentation"></div>
-      <div class="polaroid r2"><img src="aaal2.jpg" alt="AAAL with Dr. Renn"></div>
-      <div class="polaroid r3"><img src="aera.jpg" alt="AERA presentation"></div>
-
-      <div class="polaroid l1"><img src="dhday.jpg" alt="Conference dinner"></div>
-      <div class="scatter-sticky">
-        Three cities, six presentations, lots of coffee.
+      <div class="side-cluster">
+        <div class="cluster-polaroid p1"><img src="aaal.jpg" alt="AAAL presentation"></div>
+        <div class="cluster-polaroid p2"><img src="aaal2.jpg" alt="AAAL with Dr. Renn"></div>
+        <div class="cluster-polaroid p3"><img src="aera.jpg" alt="AERA presentation"></div>
+        <div class="cluster-polaroid p4"><img src="dhday.jpg" alt="Conference dinner"></div>
       </div>
     </article>
 
-    <!-- MOMENT: Penn State (May 2025) — text card + side polaroid -->
+    <!-- MOMENT: Penn State (May 2025) — text card on left, polaroid on right -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -555,7 +494,7 @@
       </div>
     </article>
 
-    <!-- MOMENT: First fieldwork (Aug 2023) — text card + side polaroid -->
+    <!-- MOMENT: First fieldwork (Aug 2023) — text card on left, polaroid on right -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
