@@ -74,7 +74,6 @@
   /* PAGE */
   .page { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
 
-  /* PAGE HEADER */
   .page-header {
     padding: 3rem 0 2rem;
     text-align: center;
@@ -119,7 +118,7 @@
     padding: 1rem 0 1rem 3rem;
   }
 
-  /* PAIRED ROW: two entries sharing a horizontal slot */
+  /* PAIRED ROW */
   .pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -137,8 +136,9 @@
     margin-left: 0;
   }
 
-  /* MARKER ON SPINE */
-  .entry .marker {
+  /* MARKER */
+  .entry .marker,
+  .scatter-entry .marker {
     position: absolute;
     top: 1.75rem;
     width: 38px;
@@ -155,7 +155,8 @@
   }
   .entry.left .marker { right: -19px; }
   .entry.right .marker { left: -19px; }
-  .entry .marker svg { width: 18px; height: 18px; }
+  .entry .marker svg,
+  .scatter-entry .marker svg { width: 18px; height: 18px; }
 
   /* CARDS */
   .card {
@@ -187,7 +188,6 @@
   .entry.left .card::after { right: -8px; transform: rotate(45deg); }
   .entry.right .card::after { left: -8px; transform: rotate(-135deg); }
 
-  /* CARD CONTENT */
   .card-meta {
     display: flex;
     align-items: center;
@@ -245,19 +245,16 @@
 
   .card.project { border-left: 3px solid var(--accent); }
 
-  /* STICKY NOTES */
+  /* STICKY NOTES (for solo entries) */
   .sticky-wrap {
     position: absolute;
     top: 1.5rem;
     width: 220px;
     z-index: 1;
   }
-  .entry.left .sticky-wrap {
-    left: calc(100% + 4rem);
-  }
-  .entry.right .sticky-wrap {
-    right: calc(100% + 4rem);
-  }
+  .entry.left .sticky-wrap { left: calc(100% + 4rem); }
+  .entry.right .sticky-wrap { right: calc(100% + 4rem); }
+
   .sticky {
     background: var(--sticky);
     border: 1px solid var(--sticky-border);
@@ -274,342 +271,62 @@
   }
   .sticky:nth-of-type(even) { transform: rotate(1.5deg); }
   .sticky:hover { transform: rotate(0deg) scale(1.02); }
-  .sticky-image {
-    width: 100%;
-    border-radius: 2px;
-    margin-top: 0.6rem;
-    display: block;
-    border: 1px solid var(--sticky-border);
-  }
 
-  /* WIDE CARD (e.g., Conference film strip) */
-  .wide-entry {
+  /* SCATTER ENTRY (Conference Season) */
+  .scatter-entry {
     position: relative;
     width: 100%;
-    margin-bottom: 1.5rem;
-    padding: 1rem 0;
+    margin: 2rem 0 4rem;
+    min-height: 340px;
   }
-  .wide-entry .marker {
+  .scatter-entry .marker {
     left: 50%;
     transform: translateX(-50%);
-    top: 1.75rem;
+    top: 50%;
+    margin-top: -19px;
   }
-  .wide-card {
+  .scatter-card {
     background: white;
     border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
     border-radius: var(--radius);
-    padding: 1.75rem;
+    padding: 1.25rem 1.5rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    margin: 0 1.5rem;
+    width: 280px;
+    margin: 130px auto 0;
     position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+  .scatter-card .card-meta { justify-content: center; margin-bottom: 0.4rem; }
+  .scatter-card .card-title { font-size: 16px; margin-bottom: 0; }
+
+  .polaroid {
+    position: absolute;
+    background: white;
+    padding: 8px 8px 22px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    border: 1px solid #eee;
     z-index: 2;
+    transition: transform 0.25s;
   }
-  .wide-card .card-meta { justify-content: center; }
-  .wide-card .card-title { text-align: center; margin-bottom: 0.4rem; }
-  .wide-card .wide-note {
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    text-align: center;
-    color: var(--text-muted);
-    margin-bottom: 1.25rem;
-  }
-
-  /* FILM STRIP */
-  .film-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-    background: #2a2a2a;
-    padding: 0.6rem 0.5rem;
-    border-radius: 4px;
-  }
-  .film-strip .frame {
-    background: #111;
-    padding: 4px;
-    overflow: hidden;
-    transition: transform 0.2s;
-  }
-  .film-strip .frame:nth-child(1) { transform: rotate(-1.2deg); }
-  .film-strip .frame:nth-child(2) { transform: rotate(0.8deg); }
-  .film-strip .frame:nth-child(3) { transform: rotate(-0.6deg); }
-  .film-strip .frame:nth-child(4) { transform: rotate(1.4deg); }
-  .film-strip .frame:hover { transform: rotate(0) scale(1.04); z-index: 5; }
-  .film-strip img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
+  .polaroid img {
     display: block;
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+  }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.08) !important;
+    z-index: 6;
   }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .sticky-wrap { display: none; } /* hide sticky notes when there's no room */
-    .film-strip img { height: 110px; }
-  }
-  @media (max-width: 760px) {
-    .timeline::before { left: 22px; transform: none; }
-    .entry, .entry.right {
-      width: 100%;
-      margin-left: 0;
-      padding: 0.75rem 0 0.75rem 3.5rem;
-    }
-    .pair { grid-template-columns: 1fr; }
-    .pair .entry, .pair .entry.right {
-      width: 100%;
-      padding: 0.75rem 0 0.75rem 3.5rem;
-    }
-    .entry.left .marker, .entry.right .marker { left: 4px; right: auto; }
-    .entry.left .card::after, .entry.right .card::after {
-      left: -8px; right: auto; transform: rotate(-135deg);
-    }
-    .entry.left .card.moment::after, .entry.right .card.moment::after {
-      background: var(--accent-soft);
-    }
+  /* Right-side cluster */
+  .polaroid.r1 { top: 0;     left: 60%;  width: 150px; transform: rotate(4deg); }
+  .polaroid.r2 { top: 70px;  left: 78%;  width: 140px; transform: rotate(-3deg); }
+  .polaroid.r3 { top: 180px; left: 64%;  width: 155px; transform: rotate(2.5deg); }
 
-    /* Sticky notes appear inline below their parent on mobile */
-    .sticky-wrap {
-      display: block;
-      position: static;
-      width: 100%;
-      margin-top: 1rem;
-    }
-
-    /* Wide entry */
-    .wide-entry .marker { left: 4px; transform: none; }
-    .wide-card { margin: 0 0 0 2.5rem; padding: 1.25rem; }
-    .film-strip { grid-template-columns: repeat(2, 1fr); }
-    .film-strip img { height: 130px; }
-
-    nav ul { gap: 1rem; overflow-x: auto; }
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 2rem;
-    text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12px;
-    color: var(--text-light);
-    border-top: 1px solid var(--border);
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <ul>
-    <li><a href="index.html">About</a></li>
-    <li><a href="research.html" class="active">Research</a></li>
-  </ul>
-</nav>
-
-<main class="page">
-
-  <header class="page-header">
-    <h1>Research</h1>
-    <p>Projects, fieldwork, and notes from along the way.</p>
-  </header>
-
-  <!--
-    ============================================================
-    LAYOUT GUIDE
-    ============================================================
-    Three layout patterns are supported:
-
-    1) SOLO ENTRY — alternate left and right
-       <article class="entry left"> ... </article>
-       <article class="entry right"> ... </article>
-
-    2) PAIRED ROW — two entries sharing one row (one left, one right)
-       <div class="pair">
-         <article class="entry left"> ... </article>
-         <article class="entry right"> ... </article>
-       </div>
-
-    3) WIDE CARD — full-width entry that spans across the spine
-       <article class="wide-entry"> ... </article>
-
-    Card types:
-       <div class="card project"> ... </div>   — projects (white, blue accent)
-       <div class="card moment">  ... </div>   — moments (pale blue, italic)
-
-    Optional sticky notes — attach to any solo entry.
-    Place inside the <article class="entry ..."> block:
-       <div class="sticky-wrap">
-         <div class="sticky">your note text here</div>
-         <div class="sticky">a second one if you like</div>
-       </div>
-    Sticky notes render in the empty space across the spine.
-    On narrow screens (< 900px) sticky notes hide; on phones (< 760px)
-    they reappear below their parent card.
-    ============================================================
-  -->
-
-  <div class="timeline">
-
-    <!-- ============================================================ -->
-    <!-- PAIRED ROW: two ongoing projects                              -->
-    <!-- ============================================================ -->
-    <div class="pair">
-
-      <article class="entry left">
-        <div class="marker" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
-          </svg>
-        </div>
-        <div class="card project">
-          <div class="card-meta">
-            <span>Project</span>
-            <span class="dot"></span>
-            <span class="date-label">Ongoing</span>
-          </div>
-          <h3 class="card-title">Language Allocation in Practice in Dual Language Classrooms</h3>
-          <span class="card-collab">with Dr. Jennifer Renn</span>
-          <p class="card-body">
-            A case study examining bilingual teachers' micro-interactions and language choices in a Spanish–English dual language program, asking how they articulate and enact language allocation policy in the classroom. Data include classroom observation videos from a larger federally-funded project and stimulated recall interviews where teachers reflect on their language decisions.
-          </p>
-        </div>
-      </article>
-
-      <article class="entry right">
-        <div class="marker" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
-          </svg>
-        </div>
-        <div class="card project">
-          <div class="card-meta">
-            <span>Project</span>
-            <span class="dot"></span>
-            <span class="date-label">Ongoing</span>
-          </div>
-          <h3 class="card-title">Interactional and Questioning Moves in Instructional Coaching Discourse</h3>
-          <span class="card-collab">with Dr. Haiyan Li and Dr. Jennifer Renn</span>
-          <p class="card-body">
-            A study of the discourse strategies — interactional moves and questions — used by a sociocultural instructional coach. We combine qualitative methods with computational tools to perform close coaching discourse analysis and to apply sentence embeddings for uncovering patterns across a larger dataset.
-          </p>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- WIDE CARD: Conference Season film strip                       -->
-    <!-- ============================================================ -->
-    <article class="wide-entry">
-      <div class="marker" aria-hidden="true">
-        <!-- camera icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-          <circle cx="12" cy="13" r="4"/>
-        </svg>
-      </div>
-      <div class="wide-card">
-        <div class="card-meta">
-          <span>Moment</span>
-          <span class="dot"></span>
-          <span class="date-label">March – April 2026</span>
-        </div>
-        <h3 class="card-title">Conference Season</h3>
-        <p class="wide-note">Three cities, six presentations, lots of coffee.</p>
-        <div class="film-strip">
-          <div class="frame"><img src="dhday.jpg" alt="Conference photo 1"></div>
-          <div class="frame"><img src="aaal.jpg" alt="Conference photo 2"></div>
-          <div class="frame"><img src="aaal2.jpg" alt="Conference photo 3"></div>
-          <div class="frame"><img src="aera.jpg" alt="Conference photo 4"></div>
-        </div>
-      </div>
-    </article>
-
-    <!-- ============================================================ -->
-    <!-- MOMENT: Penn State (May 2025) — with sticky note              -->
-    <!-- ============================================================ -->
-    <article class="entry left">
-      <div class="marker" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-          <circle cx="12" cy="13" r="4"/>
-        </svg>
-      </div>
-      <div class="card moment">
-        <div class="card-meta">
-          <span>Moment</span>
-          <span class="dot"></span>
-          <span class="date-label">May 2025</span>
-        </div>
-        <h3 class="card-title">Translinguistic Institute at Penn State</h3>
-        <p class="card-body">
-          I was accepted into this brilliant weeklong writing institute, mentored by Dr. Suresh Canagarajah — a rare opportunity to slow down and learn how to critically re-vision your work.
-        </p>
-        <img class="card-image" src="pennstate.jpg" alt="Translinguistic Institute at Penn State, May 2025">
-      </div>
-      <div class="sticky-wrap">
-        <div class="sticky">
-          My paper: an autoethnography of translanguaging in superdiverse contexts, as a domestic tourist visiting Hampi.
-        </div>
-      </div>
-    </article>
-
-    <!-- ============================================================ -->
-    <!-- PROJECT: Conceptual Metaphors (Jan 2024)                      -->
-    <!-- ============================================================ -->
-    <article class="entry right">
-      <div class="marker" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
-        </svg>
-      </div>
-      <div class="card project">
-        <div class="card-meta">
-          <span>Project</span>
-          <span class="dot"></span>
-          <span class="date-label">Jan 2024</span>
-        </div>
-        <h3 class="card-title">Conceptual Metaphors of Multilingualism in Marathi</h3>
-        <span class="card-collab">with Dr. Jessica Chandras</span>
-        <p class="card-body">
-          An independent research project exploring how urban speakers from Maharashtra expressed their language ideologies around Marathi Language Day. Using conceptual metaphor as a lens, we examined how language ideologies are embedded in representations of language, multilingualism, and education.
-        </p>
-      </div>
-    </article>
-
-    <!-- ============================================================ -->
-    <!-- MOMENT: First fieldwork (Aug 2023) — with sticky note         -->
-    <!-- ============================================================ -->
-    <article class="entry left">
-      <div class="marker" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-          <circle cx="12" cy="13" r="4"/>
-        </svg>
-      </div>
-      <div class="card moment">
-        <div class="card-meta">
-          <span>Moment</span>
-          <span class="dot"></span>
-          <span class="date-label">August 2023</span>
-        </div>
-        <h3 class="card-title">First Fieldwork Experience</h3>
-        <p class="card-body">
-          I had the opportunity to assist on this ethnographic project in rural Maharashtra with one of my favorite researchers. After working as a teacher for seven years, I wanted to see if I was cut out for research. This experience completely changed my professional and intellectual trajectory.
-        </p>
-        <img class="card-image" src="haraliaugust23.jpg" alt="Fieldwork — Harali, August 2023">
-      </div>
-      <div class="sticky-wrap">
-        <div class="sticky">
-          Day 3 journal entry: "It just feels like I have been trying to find a gap in the wall and create a door where there isn't any, and now the door is finally opened up."
-        </div>
-      </div>
-    </article>
-
-  </div>
-
-</main>
-
-<footer>
-  &copy; 2026 Priya M. Dabak · Purdue University
-</footer>
-
-</body>
-</html>
+  /* Left-side cluster */
+  .polaroid.l1 { top: 30px;  right: 64%; width: 150px; transform: rotate(-4deg); }
+  .scatter-sticky {
+    position:
