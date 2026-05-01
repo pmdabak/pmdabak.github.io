@@ -111,7 +111,7 @@
     position: relative;
     width: 50%;
     padding: 1rem 3rem 1rem 0;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
   .entry.right {
     margin-left: 50%;
@@ -235,67 +235,41 @@
 
   .card.project { border-left: 3px solid var(--accent); }
 
-  /* SIDE STACK: polaroid pinning a sticky note in the empty side space */
+  /* SIDE POLAROID (next to a moment card) */
   .side-stack {
     position: absolute;
     top: 1.5rem;
-    width: 220px;
+    width: 280px;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   .entry.left .side-stack { left: calc(100% + 4rem); }
   .entry.right .side-stack { right: calc(100% + 4rem); }
 
   .side-polaroid {
     background: white;
-    padding: 8px 8px 22px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    padding: 10px 10px 28px;
+    box-shadow: 3px 5px 14px rgba(0,0,0,0.18);
     border: 1px solid #eee;
     transform: rotate(-3deg);
     transition: transform 0.25s;
-    width: 200px;
-    margin-bottom: -14px;
-    position: relative;
-    z-index: 2;
+    width: 260px;
   }
   .side-polaroid img {
     display: block;
     width: 100%;
-    height: 130px;
+    height: 200px;
     object-fit: cover;
   }
   .side-polaroid:hover { transform: rotate(0) scale(1.04); }
 
-  .side-sticky {
-    background: var(--sticky);
-    border: 1px solid var(--sticky-border);
-    border-radius: 4px;
-    padding: 1rem 1.1rem;
-    font-family: 'Caveat', cursive;
-    font-size: 17px;
-    line-height: 1.4;
-    color: #4a3f0a;
-    box-shadow: 2px 4px 10px var(--sticky-shadow);
-    transform: rotate(2deg);
-    transition: transform 0.2s;
-    width: 200px;
-    margin-top: 8px;
-    z-index: 1;
-  }
-  .side-sticky:hover { transform: rotate(0) scale(1.02); }
-
-  /* Variants for visual variety */
   .entry.right .side-polaroid { transform: rotate(3deg); }
-  .entry.right .side-sticky { transform: rotate(-2deg); }
 
   /* SCATTER ENTRY (Conference Season) */
   .scatter-entry {
     position: relative;
     width: 100%;
     margin: 2rem 0 4rem;
-    min-height: 340px;
+    min-height: 560px;
   }
   .scatter-entry .marker {
     left: 50%;
@@ -311,7 +285,7 @@
     padding: 1.25rem 1.5rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     width: 280px;
-    margin: 130px auto 0;
+    margin: 230px auto 0;
     position: relative;
     z-index: 3;
     text-align: center;
@@ -322,8 +296,8 @@
   .polaroid {
     position: absolute;
     background: white;
-    padding: 8px 8px 22px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    padding: 10px 10px 28px;
+    box-shadow: 3px 5px 14px rgba(0,0,0,0.18);
     border: 1px solid #eee;
     z-index: 2;
     transition: transform 0.25s;
@@ -331,24 +305,25 @@
   .polaroid img {
     display: block;
     width: 100%;
-    height: 110px;
+    height: 200px;
     object-fit: cover;
   }
   .polaroid:hover {
-    transform: rotate(0deg) scale(1.08) !important;
+    transform: rotate(0deg) scale(1.06) !important;
     z-index: 6;
   }
 
-  .polaroid.r1 { top: 0;     left: 60%;  width: 150px; transform: rotate(4deg); }
-  .polaroid.r2 { top: 70px;  left: 78%;  width: 140px; transform: rotate(-3deg); }
-  .polaroid.r3 { top: 180px; left: 64%;  width: 155px; transform: rotate(2.5deg); }
+  .polaroid.r1 { top: 0;     left: 56%;  width: 240px; transform: rotate(4deg); }
+  .polaroid.r2 { top: 130px; left: 76%;  width: 220px; transform: rotate(-3deg); }
+  .polaroid.r3 { top: 290px; left: 58%;  width: 240px; transform: rotate(2.5deg); }
 
-  .polaroid.l1 { top: 30px;  right: 64%; width: 150px; transform: rotate(-4deg); }
+  .polaroid.l1 { top: 30px;  right: 60%; width: 240px; transform: rotate(-4deg); }
+
   .scatter-sticky {
     position: absolute;
-    top: 175px;
+    top: 280px;
     right: 60%;
-    width: 180px;
+    width: 220px;
     background: var(--sticky);
     border: 1px solid var(--sticky-border);
     border-radius: 4px;
@@ -388,21 +363,20 @@
       background: var(--accent-soft);
     }
 
-    /* side stacks render below their parent on mobile */
+    /* Side polaroid renders inline below its parent on mobile */
     .side-stack {
-      display: flex;
+      display: block;
       position: static;
       width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      gap: 1rem;
       margin-top: 1rem;
     }
-    .side-polaroid, .side-sticky {
-      width: 47%;
-      margin: 0;
+    .side-polaroid {
+      width: 75%;
+      max-width: 280px;
+      margin: 0 auto;
+      transform: rotate(-2deg);
     }
+    .entry.right .side-polaroid { transform: rotate(2deg); }
 
     /* Scatter entry collapses gracefully */
     .scatter-entry {
@@ -426,7 +400,7 @@
     .polaroid.r1, .polaroid.r2, .polaroid.r3, .polaroid.l1 {
       transform: rotate(-2deg);
     }
-    .polaroid img { height: 110px; }
+    .polaroid img { height: 160px; }
     .scatter-sticky { width: 92%; }
 
     nav ul { gap: 1rem; overflow-x: auto; }
@@ -524,9 +498,9 @@
         <h3 class="card-title">Conference Season</h3>
       </div>
 
-      <div class="polaroid r1"><img src="aaal.jpeg" alt="AAAL presentation"></div>
-      <div class="polaroid r2"><img src="aaal2.jpeg" alt="AAAL with Dr. Renn"></div>
-      <div class="polaroid r3"><img src="aera.jpeg" alt="AERA presentation"></div>
+      <div class="polaroid r1"><img src="aaal.jpg" alt="AAAL presentation"></div>
+      <div class="polaroid r2"><img src="aaal2.jpg" alt="AAAL with Dr. Renn"></div>
+      <div class="polaroid r3"><img src="aera.jpg" alt="AERA presentation"></div>
 
       <div class="polaroid l1"><img src="dhday.jpg" alt="Conference dinner"></div>
       <div class="scatter-sticky">
@@ -534,7 +508,7 @@
       </div>
     </article>
 
-    <!-- MOMENT: Penn State (May 2025) — text card + side polaroid pinning sticky -->
+    <!-- MOMENT: Penn State (May 2025) — text card + side polaroid -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -556,9 +530,6 @@
       <div class="side-stack">
         <div class="side-polaroid">
           <img src="pennstate.jpg" alt="Translinguistic Institute at Penn State, May 2025">
-        </div>
-        <div class="side-sticky">
-          My paper: an autoethnography of translanguaging in superdiverse contexts, as a domestic tourist visiting Hampi.
         </div>
       </div>
     </article>
@@ -584,7 +555,7 @@
       </div>
     </article>
 
-    <!-- MOMENT: First fieldwork (Aug 2023) — text card + side polaroid pinning sticky -->
+    <!-- MOMENT: First fieldwork (Aug 2023) — text card + side polaroid -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -606,9 +577,6 @@
       <div class="side-stack">
         <div class="side-polaroid">
           <img src="haraliaugust23.jpg" alt="Fieldwork — Harali, August 2023">
-        </div>
-        <div class="side-sticky">
-          Day 3 journal entry: "It just feels like I have been trying to find a gap in the wall and create a door where there isn't any, and now the door is finally opened up."
         </div>
       </div>
     </article>
