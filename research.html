@@ -15,6 +15,7 @@
     --accent-light: #E6F1FB;
     --accent-mid: #378ADD;
     --accent-soft: #F4F8FC;
+    --pin: #c94545;
     --text: #1a1a1a;
     --text-muted: #5a5a5a;
     --text-light: #888;
@@ -217,16 +218,53 @@
 
   .card-body { font-size: 15px; line-height: 1.7; color: var(--text); }
 
+  /* MOMENT cards: pinned & tilted, handwritten title, no "MOMENT" label */
   .card.moment {
     background: var(--accent-soft);
     border-color: var(--accent-light);
+    transform: rotate(-1.2deg);
+    transition: transform 0.25s, box-shadow 0.2s, border-color 0.2s;
+    overflow: visible;
   }
+  .entry.right .card.moment { transform: rotate(1deg); }
+  .card.moment:hover { transform: rotate(0); }
+
   .card.moment::after {
     background: var(--accent-soft);
     border-top-color: var(--accent-light);
     border-right-color: var(--accent-light);
   }
   .card.moment .card-body { font-style: italic; color: var(--text-muted); }
+
+  /* The pin at the top of moment cards */
+  .card.moment::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle at 35% 35%, #e87575 0%, var(--pin) 50%, #8a2a2a 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25), inset -1px -2px 3px rgba(0,0,0,0.2);
+    z-index: 4;
+  }
+
+  /* Hide the "MOMENT" label and dot — show date only */
+  .card.moment .card-meta span:first-child,
+  .card.moment .card-meta .dot {
+    display: none;
+  }
+
+  /* Handwritten title for moments */
+  .card.moment .card-title {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--accent);
+  }
 
   .card.project { border-left: 3px solid var(--accent); }
 
@@ -258,7 +296,7 @@
   .side-polaroid:hover { transform: rotate(0) scale(1.04); }
   .entry.right .side-polaroid { transform: rotate(3deg); }
 
-  /* SIDE POLAROID CLUSTER (multiple polaroids stacked across the spine) */
+  /* SIDE POLAROID CLUSTER */
   .side-cluster {
     position: absolute;
     top: 1rem;
@@ -288,7 +326,6 @@
     z-index: 6;
   }
 
-  /* Cluster positions: 2 polaroids around a small area */
   .side-cluster .p1 { top: 0;    left: 0;     transform: rotate(-4deg); }
   .side-cluster .p2 { top: 30px; left: 240px; transform: rotate(3deg); }
 
@@ -315,8 +352,8 @@
     .entry.left .card.moment::after, .entry.right .card.moment::after {
       background: var(--accent-soft);
     }
+    .card.moment, .entry.right .card.moment { transform: rotate(-1deg); }
 
-    /* Side polaroid + cluster render below their parent on mobile */
     .side-stack, .side-cluster {
       display: block;
       position: static;
@@ -418,7 +455,7 @@
 
     </div>
 
-    <!-- MOMENT: Conference Season (Mar–Apr 2026) — text card on right, 4 polaroids on left -->
+    <!-- MOMENT: Conference Season (Mar–Apr 2026) -->
     <article class="entry right">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -434,16 +471,16 @@
         </div>
         <h3 class="card-title">Conference Season</h3>
         <p class="card-body">
-          Three cities, six presentations, lots of coffee. Between AAAL, AERA, and Digital Humanities Day at Purdue, these two months flew by in a blink.
+          Three cities, six presentations, lots of coffee.
         </p>
       </div>
       <div class="side-cluster">
-        <div class="cluster-polaroid p1"><img src="aaal.jpeg" alt="AAAL presentation"></div>
-        <div class="cluster-polaroid p2"><img src="aera.jpeg" alt="AERA presentation"></div>
+        <div class="cluster-polaroid p1"><img src="aaal.jpg" alt="AAAL presentation"></div>
+        <div class="cluster-polaroid p2"><img src="aera.jpg" alt="AERA presentation"></div>
       </div>
     </article>
 
-    <!-- MOMENT: Penn State (May 2025) — text card on left, polaroid on right -->
+    <!-- MOMENT: Penn State (May 2025) -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -469,28 +506,7 @@
       </div>
     </article>
 
-    <!-- PROJECT: Conceptual Metaphors (Jan 2024) -->
-    <article class="entry right">
-      <div class="marker" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
-        </svg>
-      </div>
-      <div class="card project">
-        <div class="card-meta">
-          <span>Project</span>
-          <span class="dot"></span>
-          <span class="date-label">Jan 2024</span>
-        </div>
-        <h3 class="card-title">Conceptual Metaphors of Multilingualism in Marathi</h3>
-        <span class="card-collab">with Dr. Jessica Chandras</span>
-        <p class="card-body">
-          An independent research project using a conceptual metaphors lens to understand how 150 urban Marathi speakers' language ideologies are embedded in conceptual representations of multilingualism.
-        </p>
-      </div>
-    </article>
-
-    <!-- MOMENT: First fieldwork (Aug 2023) — text card on left, polaroid on right -->
+    <!-- MOMENT: First fieldwork (Aug 2023) -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -513,6 +529,27 @@
         <div class="side-polaroid">
           <img src="haraliaugust23.jpg" alt="Fieldwork — Harali, August 2023">
         </div>
+      </div>
+    </article>
+
+    <!-- PROJECT: Conceptual Metaphors (Feb 2023) -->
+    <article class="entry right">
+      <div class="marker" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+        </svg>
+      </div>
+      <div class="card project">
+        <div class="card-meta">
+          <span>Project</span>
+          <span class="dot"></span>
+          <span class="date-label">Feb 2023</span>
+        </div>
+        <h3 class="card-title">Conceptual Metaphors of Multilingualism in Marathi</h3>
+        <span class="card-collab">with Dr. Jessica Chandras</span>
+        <p class="card-body">
+          An independent research project exploring how urban speakers from Maharashtra expressed their language ideologies around Marathi Language Day. Using conceptual metaphor as a lens, we examined how language ideologies are embedded in representations of language, multilingualism, and education.
+        </p>
       </div>
     </article>
 
