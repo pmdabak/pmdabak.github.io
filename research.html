@@ -111,7 +111,7 @@
     position: relative;
     width: 50%;
     padding: 1rem 3rem 1rem 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
   }
   .entry.right {
     margin-left: 50%;
@@ -233,44 +233,62 @@
   }
   .card.moment .card-body { font-style: italic; color: var(--text-muted); }
 
-  .card-image {
-    width: 100%;
-    max-height: 380px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-top: 1rem;
-    display: block;
-    border: 1px solid var(--border);
-  }
-
   .card.project { border-left: 3px solid var(--accent); }
 
-  /* STICKY NOTES (for solo entries) */
-  .sticky-wrap {
+  /* SIDE STACK: polaroid pinning a sticky note in the empty side space */
+  .side-stack {
     position: absolute;
     top: 1.5rem;
     width: 220px;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .entry.left .sticky-wrap { left: calc(100% + 4rem); }
-  .entry.right .sticky-wrap { right: calc(100% + 4rem); }
+  .entry.left .side-stack { left: calc(100% + 4rem); }
+  .entry.right .side-stack { right: calc(100% + 4rem); }
 
-  .sticky {
+  .side-polaroid {
+    background: white;
+    padding: 8px 8px 22px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    border: 1px solid #eee;
+    transform: rotate(-3deg);
+    transition: transform 0.25s;
+    width: 200px;
+    margin-bottom: -14px;
+    position: relative;
+    z-index: 2;
+  }
+  .side-polaroid img {
+    display: block;
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+  }
+  .side-polaroid:hover { transform: rotate(0) scale(1.04); }
+
+  .side-sticky {
     background: var(--sticky);
     border: 1px solid var(--sticky-border);
     border-radius: 4px;
     padding: 1rem 1.1rem;
     font-family: 'Caveat', cursive;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.4;
     color: #4a3f0a;
     box-shadow: 2px 4px 10px var(--sticky-shadow);
-    transform: rotate(-2deg);
+    transform: rotate(2deg);
     transition: transform 0.2s;
-    margin-bottom: 1rem;
+    width: 200px;
+    margin-top: 8px;
+    z-index: 1;
   }
-  .sticky:nth-of-type(even) { transform: rotate(1.5deg); }
-  .sticky:hover { transform: rotate(0deg) scale(1.02); }
+  .side-sticky:hover { transform: rotate(0) scale(1.02); }
+
+  /* Variants for visual variety */
+  .entry.right .side-polaroid { transform: rotate(3deg); }
+  .entry.right .side-sticky { transform: rotate(-2deg); }
 
   /* SCATTER ENTRY (Conference Season) */
   .scatter-entry {
@@ -321,12 +339,10 @@
     z-index: 6;
   }
 
-  /* Right-side cluster */
   .polaroid.r1 { top: 0;     left: 60%;  width: 150px; transform: rotate(4deg); }
   .polaroid.r2 { top: 70px;  left: 78%;  width: 140px; transform: rotate(-3deg); }
   .polaroid.r3 { top: 180px; left: 64%;  width: 155px; transform: rotate(2.5deg); }
 
-  /* Left-side cluster */
   .polaroid.l1 { top: 30px;  right: 64%; width: 150px; transform: rotate(-4deg); }
   .scatter-sticky {
     position: absolute;
@@ -350,7 +366,7 @@
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .sticky-wrap { display: none; }
+    .side-stack { display: none; }
   }
   @media (max-width: 760px) {
     .timeline::before { left: 22px; transform: none; }
@@ -372,12 +388,20 @@
       background: var(--accent-soft);
     }
 
-    /* sticky notes appear inline below their parent on mobile */
-    .sticky-wrap {
-      display: block;
+    /* side stacks render below their parent on mobile */
+    .side-stack {
+      display: flex;
       position: static;
       width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 1rem;
       margin-top: 1rem;
+    }
+    .side-polaroid, .side-sticky {
+      width: 47%;
+      margin: 0;
     }
 
     /* Scatter entry collapses gracefully */
@@ -500,19 +524,17 @@
         <h3 class="card-title">Conference Season</h3>
       </div>
 
-      <!-- Right-side cluster: 3 polaroids -->
       <div class="polaroid r1"><img src="aaal.jpg" alt="AAAL presentation"></div>
       <div class="polaroid r2"><img src="aaal2.jpg" alt="AAAL with Dr. Renn"></div>
       <div class="polaroid r3"><img src="aera.jpg" alt="AERA presentation"></div>
 
-      <!-- Left-side cluster: 1 polaroid + sticky -->
       <div class="polaroid l1"><img src="dhday.jpg" alt="Conference dinner"></div>
       <div class="scatter-sticky">
         Three cities, six presentations, lots of coffee.
       </div>
     </article>
 
-    <!-- MOMENT: Penn State (May 2025) — with sticky note -->
+    <!-- MOMENT: Penn State (May 2025) — text card + side polaroid pinning sticky -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -530,10 +552,12 @@
         <p class="card-body">
           I was accepted into this brilliant weeklong writing institute, mentored by Dr. Suresh Canagarajah — a rare opportunity to slow down and learn how to critically re-vision your work.
         </p>
-        <img class="card-image" src="pennstate.jpg" alt="Translinguistic Institute at Penn State, May 2025">
       </div>
-      <div class="sticky-wrap">
-        <div class="sticky">
+      <div class="side-stack">
+        <div class="side-polaroid">
+          <img src="pennstate.jpg" alt="Translinguistic Institute at Penn State, May 2025">
+        </div>
+        <div class="side-sticky">
           My paper: an autoethnography of translanguaging in superdiverse contexts, as a domestic tourist visiting Hampi.
         </div>
       </div>
@@ -560,7 +584,7 @@
       </div>
     </article>
 
-    <!-- MOMENT: First fieldwork (Aug 2023) — with sticky note -->
+    <!-- MOMENT: First fieldwork (Aug 2023) — text card + side polaroid pinning sticky -->
     <article class="entry left">
       <div class="marker" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -578,10 +602,12 @@
         <p class="card-body">
           I had the opportunity to assist on this ethnographic project in rural Maharashtra with one of my favorite researchers. After working as a teacher for seven years, I wanted to see if I was cut out for research. This experience completely changed my professional and intellectual trajectory.
         </p>
-        <img class="card-image" src="haraliaugust23.jpg" alt="Fieldwork — Harali, August 2023">
       </div>
-      <div class="sticky-wrap">
-        <div class="sticky">
+      <div class="side-stack">
+        <div class="side-polaroid">
+          <img src="haraliaugust23.jpg" alt="Fieldwork — Harali, August 2023">
+        </div>
+        <div class="side-sticky">
           Day 3 journal entry: "It just feels like I have been trying to find a gap in the wall and create a door where there isn't any, and now the door is finally opened up."
         </div>
       </div>
