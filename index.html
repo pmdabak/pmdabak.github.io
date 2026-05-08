@@ -284,11 +284,21 @@
   }
 
   @media (max-width: 640px) {
+    .page { padding: 0 1.25rem; }
+    nav { padding: 0 1.25rem; }
     #about { grid-template-columns: 1fr; }
     .hero-photo { order: -1; }
     .hero-photo img { width: 100px; height: 100px; }
     .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
     nav ul { gap: 1rem; overflow-x: auto; }
+    .pub-citation, .hero-contact-label, .work-desc {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .pub-citation a, .hero-contact-label a {
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
   }
 </style>
 </head>
@@ -413,7 +423,7 @@
       </div>
 
       <div class="pub-item">
-        <p class="pub-citation">Chandras, J., Tirthali, D., &amp; <strong>Dabak, P. M.</strong> (2024). Mapping linguistic sociality in rural India: Children and youths' perceptions of self and language in space. <em>NEOS: A Publication of the Anthropology of Children and Youth Interest Group</em>. <a href="https://acyig.americananthro.org/neosvol15iss2fall23/chandras/" target="_blank">https://acyig.americananthro.org/neosvol15iss2fall23/chandras/</a></p>
+        <p class="pub-citation">Chandras, J., Tirthali, D., &amp; <strong>Dabak, P. M.</strong> (2024). Mapping linguistic sociality in rural India: Children and youths' perceptions of self and language in space. <em>NEOS: A Publication of the Anthropology of Children and Youth Interest Group</em>. <a href="https://acyig.americananthro.org/neosvol15iss2fall23/chandras/" target="_blank">[Read article]</a></p>
       </div>
 
     </div>
