@@ -187,59 +187,6 @@
     top: 4px;
   }
 
-  /* WORK EXPERIENCE */
-  .work-list { display: flex; flex-direction: column; gap: 1.5rem; }
-  .work-item {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    transition: box-shadow 0.2s, border-color 0.2s;
-  }
-  .work-item:hover {
-    box-shadow: 0 6px 20px rgba(24, 95, 165, 0.08);
-    border-color: var(--accent-mid);
-  }
-  .work-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.2rem;
-  }
-  .work-role { font-size: 17px; line-height: 1.4; }
-  .work-dates {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-    color: var(--text-light);
-  }
-  .work-org {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-    color: var(--accent);
-    margin-bottom: 0.4rem;
-  }
-  .work-desc { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
-  .work-subrole {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-  .work-subrole-title {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 0.25rem;
-  }
-  .work-subrole-dates {
-    font-weight: 400;
-    color: var(--text-light);
-    font-size: 13px;
-  }
-
   /* FOOTER */
   footer {
     padding: 2rem;
@@ -256,7 +203,7 @@
     .hero-photo { order: -1; }
     .hero-photo img { width: 100px; height: 100px; }
     .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
-    .pub-citation, .hero-contact-label, .work-desc {
+    .pub-citation, .hero-contact-label {
       overflow-wrap: anywhere;
       word-break: break-word;
     }
@@ -331,33 +278,6 @@
           <p class="cv-org">Savitribai Phule Pune University, Pune, India</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- AWARDS & HONORS -->
-  <section id="awards">
-    <h2>Awards &amp; Honors</h2>
-
-    <div class="cv-block">
-
-      <div class="cv-entry">
-        <span class="cv-year">August 2024</span>
-        <div>
-          <p class="cv-role"><a href="https://education.purdue.edu/news/2024/10/07/college-recognizes-1st-2nd-year-doctoral-students/" target="_blank">Ross Fellowship</a></p>
-          <p class="cv-org">Purdue University</p>
-          <p class="cv-detail">Recruitment fellowship for graduate students.</p>
-        </div>
-      </div>
-
-      <div class="cv-entry">
-        <span class="cv-year">May 2025</span>
-        <div>
-          <p class="cv-role"><a href="https://iecp.la.psu.edu/2025-institute-for-translinguistic-research-and-publishing/" target="_blank">Institute for Translinguistic Research and Publishing</a>, Inaugural Cohort</p>
-          <p class="cv-org">Penn State University</p>
-          <p class="cv-detail">Selected to participate in a mentored research and publishing workshop for graduate students and early career scholars.</p>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -451,15 +371,42 @@
     <div class="pub-list">
 
       <div class="pub-item">
-        <p class="pub-citation"><strong>Dabak, P. M.</strong> (2026). Interpreting multimodal street signs. In L. Horvath &amp; M. Iannuzzi (Eds.), <em>New Ways in Teaching Visual Literacy</em> (pp. 258–260). TESOL Press.</p>
+        <p class="pub-citation"><strong>Dabak, P. M.</strong> (2026). Interpreting multimodal street signs [Lesson plan]. In L. Horvath &amp; M. Iannuzzi (Eds.), <em>New Ways in Teaching Visual Literacy</em> (pp. 258–260). TESOL Press.</p>
       </div>
 
       <div class="pub-item">
-        <p class="pub-citation"><strong>Dabak, P. M.</strong> (2024, Winter). Deconstructing engagement for the modern language classroom. <em>Notes from the Field: A Quarterly e-Magazine for ESL/ELT Professionals</em>, Pro Lingua Learning. <a href="https://www.prolingualearning.com/notesfromthefield/" target="_blank">[Magazine site]</a></p>
+        <p class="pub-citation"><strong>Dabak, P. M.</strong> (2024, Winter). Deconstructing engagement for the modern language classroom. <em>Notes from the Field: A Quarterly e-Magazine for ESL/ELT Professionals</em>, Pro Lingua Learning. <a href="https://www.icontact-archive.com/archive?c=1531088&f=6029&s=6328&m=451656&t=3170bd34c51752d227ee92b07f8b8872c55debbe7c6fc7f91d92326fd5bd638d" target="_blank">[Read article]</a></p>
       </div>
 
       <div class="pub-item">
         <p class="pub-citation"><strong>Dabak, P. M.</strong> (2024, December 23). Jessica Chandras on her book, <em>Mother Tongue Prestige</em> [Interview]. CaMP Anthropology. <a href="https://campanthropology.org/2024/12/23/jessica-chandras-on-her-book-mother-tongue-prestige/" target="_blank">[Read interview]</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AWARDS & HONORS -->
+  <section id="awards">
+    <h2>Awards &amp; Honors</h2>
+
+    <div class="cv-block">
+
+      <div class="cv-entry">
+        <span class="cv-year">August 2024</span>
+        <div>
+          <p class="cv-role"><a href="https://education.purdue.edu/news/2024/10/07/college-recognizes-1st-2nd-year-doctoral-students/" target="_blank">Ross Fellowship</a></p>
+          <p class="cv-org">Purdue University</p>
+          <p class="cv-detail">Recruitment fellowship for graduate students.</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <span class="cv-year">May 2025</span>
+        <div>
+          <p class="cv-role"><a href="https://iecp.la.psu.edu/2025-institute-for-translinguistic-research-and-publishing/" target="_blank">Institute for Translinguistic Research and Publishing</a>, Inaugural Cohort</p>
+          <p class="cv-org">Penn State University</p>
+          <p class="cv-detail">Selected to participate in a mentored research and publishing workshop for graduate students and early career scholars.</p>
+        </div>
       </div>
 
     </div>
